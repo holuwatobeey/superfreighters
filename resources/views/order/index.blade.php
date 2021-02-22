@@ -1,7 +1,9 @@
 @extends('layout.main_layout')
 
 @section('content')
+@include('layout.partials.nav')
 <div class="container mb-5" id="getStarted">
+
     <h3 class="text-center">Schedule A Delivery</h3>
 
     <div class="row">
@@ -12,6 +14,18 @@
 
                     <div class="card card-body col-md-12 shadow">
                        <form action="">
+
+                            <div class="form-row mb-4">
+                                <div class="col">
+                                <label for="">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Full Name">
+                                </div>
+                                <div class="col">
+                                <label for="">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email Address">
+                                </div>
+                            </div>
+
                             <div class="form-row mb-4">
                                 <div class="col">
                                 <label for="">Origin Country</label>
@@ -68,6 +82,7 @@
                     </div>
                 </div>                
         </div>
+        
     </div>
 
 </div>

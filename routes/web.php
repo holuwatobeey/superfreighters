@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('order.index');
 });
+
+Route::get('confirm-schedule', function () {
+    return view('order.confirm');
+});
