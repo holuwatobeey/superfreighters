@@ -41,6 +41,7 @@ body{
     opacity : 0.8;
     z-index: -1;
 }
+
 .center{
   text-align:center;
   padding-top: 20%;
@@ -61,6 +62,7 @@ body{
 }
 </style>
 
+{{-- transparent navabr scroll --}}
 <script>
     $(document).ready(function() {
     
