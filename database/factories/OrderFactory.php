@@ -32,7 +32,8 @@ class OrderFactory extends Factory
             'weight' => mt_rand(5,50),
             'mode' => mt_rand(1,2),
             'amount' =>  3500,
-            'payment_channel' => 'Paystack'
+            'payment_channel' => 'Paystack',
+            'delivery_date' => \Carbon\Carbon::now()->addDays(2)
         ];
     }
 }

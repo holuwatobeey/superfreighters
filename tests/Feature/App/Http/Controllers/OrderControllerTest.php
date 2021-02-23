@@ -215,7 +215,7 @@ class OrderControllerTest extends TestCase
         $response->assertSessionHasErrors(['mode' => 'The mode field is required.']);
     }
 
-    public function test_that_order_is_not_stored_with_all_required_data()
+    public function test_that_order_is_stored_with_all_required_data()
     {
         $data = [
             'name' => 'George Michael',

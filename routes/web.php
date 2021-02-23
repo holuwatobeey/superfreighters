@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -21,4 +22,9 @@ Route::get('/', function () {
 });
 
 Route::match(['get', 'post'],'confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
+
+Route::group(['prefix' => 'payment'], function(){
+    Route::post('/', [PaymentController::class , 'redirectToPaystack'])->name('pay');
+    Route::get('/callback', [PaymentController::class , 'handleGatewayCallback'])->name('callback');
+});
 
