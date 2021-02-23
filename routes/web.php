@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/seed', function () {
-    Artisan::call('migrate:fresh --seed');
+    \Artisan::call('migrate:fresh --seed');
     return 'Migrated';
 })->name('/');
 
