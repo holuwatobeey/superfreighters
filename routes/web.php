@@ -21,7 +21,10 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/seed', function () {
-    \Artisan::call('migrate:fresh --seed',[
+    \Artisan::call('migrate:fresh',[
+        '--force' => true
+     ]);
+     \Artisan::call('db:seed',[
         '--force' => true
      ]);
     return 'Migrated';
