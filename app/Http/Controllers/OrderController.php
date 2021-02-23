@@ -19,7 +19,9 @@ class OrderController extends Controller
             $amount = (new CalculatePrice())->run($request);
 
             $request->merge(['amount' => $amount, 'payment_channel' => 'Paystack', 'delivery_date' => ($request->mode == 0) ? Carbon::now()->addDays(2)->toDateString() : Carbon::now()->addDays(20)->toDateString()]);
+            
             Session::put('validatedData', '');
+
             Session::put('validatedData', $request->all());
 
             return view('order.confirm', compact('request'));
