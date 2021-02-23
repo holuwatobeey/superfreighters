@@ -9,7 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Mail\SendAdminEmail;
 use Mail;
-   
+use App\Models\User;   
+
 class SendAdminEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -33,7 +34,12 @@ class SendAdminEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $email = new SendAdminEmail($this->details);
-        Mail::to($this->details['email'])->send($email);
+        $admins = User::where('is_admin', 1)->get();
+
+        foreach($admins as $admin){
+            $email = new SendAdminEmail($this->details);
+            Mail::to($admin->email)->send($email);
+        }
+        
     }
 }
