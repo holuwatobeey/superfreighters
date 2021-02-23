@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Paystack;
 use App\Services\OrderService;
 use Session;
+use Exception;
+use Illuminate\Support\Facades\URL;
 
 class PaymentController extends Controller
 {
@@ -34,7 +36,7 @@ class PaymentController extends Controller
             return Paystack::getAuthorizationUrl()->redirectNow();
 
         }catch(\Exception $e) {
-            return redirect()->back()->with(['error' =>'The paystack token has expired. Please refresh the page and try again.']);
+            return Redirect::to(URL::previous() . "#getStarted")->with(['error' =>'The paystack token has expired. Please refresh the page and try again.']);
         }        
     }
 
@@ -51,12 +53,12 @@ class PaymentController extends Controller
                 //handle payment callback logic
                 $this->order->create(Session::get('validatedData'));
 
-                return redirect()->route('/')->with('success', 'Your order has been placed successfully and a mail containing the details has been sent');
+                return Redirect::to('/' . "#getStarted")->with('success', 'Your order has been placed successfully and a mail containing the details has been sent');
             }else{
-                return redirect()->back()->with(['error'=>'Sorry, Something went wrong.']);
+                return Redirect::to('/' . "#getStarted")->with(['error'=>'Sorry, Something went wrong.']);
             };
-        }catch(\Exception $e) {
-            return redirect()->back()->with(['error'=>$e->getMessage()]);
+        }catch(Exception $e) {
+            return Redirect::to('/' . "#getStarted")->with(['error'=>$e->getMessage()]);
         } 
         
     }

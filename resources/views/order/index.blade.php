@@ -20,7 +20,7 @@
     @endif
 
     @if(Session::has('success'))
-        <div class="alert alert-danger">
+        <div class="alert alert-success">
         {{ Session::get('success')}}
         </div>
     @endif
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col">
                                 <label for="">Destination City</label>
-                                <input type="text" name="destination_city" class="form-control" placeholder="Origin City">
+                                <input type="text" name="destination_city" class="form-control" placeholder="Destination City">
                                 </div>
                             </div>
 
