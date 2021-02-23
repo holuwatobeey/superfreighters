@@ -21,9 +21,11 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/seed', function () {
-    \Artisan::call('migrate:fresh --seed');
+    \Artisan::call('migrate:fresh --seed',[
+        '--force' => true
+     ]);
     return 'Migrated';
-})->name('/');
+});
 
 
 Route::match(['get', 'post'],'confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
