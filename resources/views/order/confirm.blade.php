@@ -36,82 +36,87 @@
 
     <div class="row">
         <div class="offset-md-3 col-md-6">
+            <form action="{{route('pay')}}" method="POST">
+                @csrf
                 <div class="row">
-                    <div class="card card-body col-md-12 shadow">
-                    <h5 class="text-center mb-2">Summary</h5>
+                        <div class="card card-body col-md-12 shadow">
+                            <h5 class="text-center mb-2">Summary</h5>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Full name</span>
+                                    <span class="col-md-6 text-right">{{$request->name}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Email Address</span>
+                                    <span class="col-md-6 text-right">{{$request->email}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Origin Country</span>
+                                    <span class="col-md-6 text-right">{{($request->origin_country == 'uk') ? 'United Kingdom(UK)' : 'United State(US)'}}</span>
+        
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Origin City</span>
+                                    <span class="col-md-6 text-right">{{$request->origin_city}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Destination Country</span>
+                                    <span class="col-md-6 text-right">Nigeria</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Destination City</span>
+                                    <span class="col-md-6 text-right">{{$request->destination_city}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Parcel(s)</span>
+                                    <span class="col-md-6 text-right">{{$request->parcels}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Weight Of parcel(s)</span>
+                                    <span class="col-md-6 text-right">{{$request->weight}}KG</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Mode Of Transportation</span>
+                                    <span class="col-md-6 text-right">{{($request->mode == 0) ? 'Air' : 'Sea'}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Expected Delivery Date</span>
+                                    <span class="col-md-6 text-right">{{$end_date}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Shipping Cost</span>
+                                    <span class="col-md-6 text-right">&#8358; {{number_format($total_price)}} </span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <span class="col-md-6 text-left">Customs Tax</span>
+                                    <span class="col-md-6 text-right">&#8358; {{number_format($tax)}}</span>
+                                </div><hr/>
+        
+                                <div class="row col-md-12">
+                                    <b class="col-md-6 text-left">Total Payment</b>
+                                    <b class="col-md-6 text-right">&#8358; {{number_format($total_price + $tax)}} </b>
+                                </div>
+        
+        
+                                <div class="text-center mt-2">
+                                    <button type="submit" class="btn btn-primary shadow">Proceed To Payment</button>
+                                </div>
+                            </div>
+                </div>         
+                <input type="hidden" name="currency" value="NGN">
+            </form>
 
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Full name</span>
-                            <span class="col-md-6 text-right">{{$request->name}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Email Address</span>
-                            <span class="col-md-6 text-right">{{$request->email}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Origin Country</span>
-                            <span class="col-md-6 text-right">{{($request->origin_country == 'uk') ? 'United Kingdom(UK)' : 'United State(US)'}}</span>
-
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Origin City</span>
-                            <span class="col-md-6 text-right">{{$request->origin_city}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Destination Country</span>
-                            <span class="col-md-6 text-right">Nigeria</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Destination City</span>
-                            <span class="col-md-6 text-right">{{$request->destination_city}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Parcel(s)</span>
-                            <span class="col-md-6 text-right">{{$request->parcels}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Weight Of parcel(s)</span>
-                            <span class="col-md-6 text-right">{{$request->weight}}KG</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Mode Of Transportation</span>
-                            <span class="col-md-6 text-right">{{($request->mode == 0) ? 'Air' : 'Sea'}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Expected Delivery Date</span>
-                            <span class="col-md-6 text-right">{{$end_date}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Shipping Cost</span>
-                            <span class="col-md-6 text-right">&#8358; {{number_format($total_price)}} </span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <span class="col-md-6 text-left">Customs Tax</span>
-                            <span class="col-md-6 text-right">&#8358; {{number_format($tax)}}</span>
-                        </div><hr/>
-
-                        <div class="row col-md-12">
-                            <b class="col-md-6 text-left">Total Payment</b>
-                            <b class="col-md-6 text-right">&#8358; {{number_format($total_price + $tax)}} </b>
-                        </div>
-
-
-                        <div class="text-center mt-2">
-                            <button class="btn btn-primary shadow">Proceed To Payment</button>
-                        </div>
-                    </div>
-                </div>                
         </div>
     </div>
 

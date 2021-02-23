@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('origin_country');
             $table->string('origin_city');
-            $table->string('destination_country');
+            $table->string('destination_country')->default('Nigeria');
             $table->string('destination_city');
             $table->integer('parcels');
             $table->integer('weight');

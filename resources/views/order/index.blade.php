@@ -12,6 +12,20 @@
             </ul>
         </div>
     @endif
+
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+        {{ Session::get('error')}}
+        </div>
+    @endif
+
+    @if(Session::has('success'))
+        <div class="alert alert-danger">
+        {{ Session::get('success')}}
+        </div>
+    @endif
+
+    
     <h3 class="text-center">Schedule A Delivery</h3>
 
     <div class="row">

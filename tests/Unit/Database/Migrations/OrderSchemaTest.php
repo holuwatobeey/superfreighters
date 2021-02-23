@@ -16,6 +16,6 @@ class OrderSchemaTest extends TestCase
      */
     public function test_that_orders_schema_has_all_expected_columns()
     {
-        $this->assertTrue(Schema::hasColumns('orders', ['id', 'name', 'email', 'destination_country', 'destination_city', 'parcels', 'weight', 'mode', 'amount', 'payment_channel']), 1);
+        $this->assertTrue(Schema::hasColumns('orders', ['id', 'name', 'email', 'destination_country', 'destination_city', 'parcels', 'weight', 'mode', 'amount', 'payment_channel', 'delivery_date']), 1);
     }
 }
