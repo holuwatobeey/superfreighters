@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Paystack;
+use App\Services\OrderService;
 use Session;
 
 class PaymentController extends Controller
 {
+
+    protected $order;
+
+    public function __construct(OrderService $order){
+        $this->order = $order;
+    }
+
     /**
      * Redirect the User to Paystack Payment Page
      * @return Url
@@ -26,7 +34,7 @@ class PaymentController extends Controller
             return Paystack::getAuthorizationUrl()->redirectNow();
 
         }catch(\Exception $e) {
-            return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
+            return redirect()->back()->with(['error' =>'The paystack token has expired. Please refresh the page and try again.']);
         }        
     }
 
@@ -36,11 +44,20 @@ class PaymentController extends Controller
      */
     public function handleGatewayCallback()
     {
-        $paymentDetails = Paystack::getPaymentData();
+        try{
+            $paymentDetails = Paystack::getPaymentData();
+            if ($paymentDetails['data']['status'] == 'success') { 
 
-        dd($paymentDetails);
-        // Now you have the payment details,
-        // you can store the authorization_code in your db to allow for recurrent subscriptions
-        // you can then redirect or do whatever you want
+                //handle payment callback logic
+                $this->order->create(Session::get('validatedData'));
+
+                return redirect()->route('/')->with('success', 'Your order has been placed successfully and a mail containing the details has been sent');
+            }else{
+                return redirect()->back()->with(['error'=>'Sorry, Something went wrong.']);
+            };
+        }catch(\Exception $e) {
+            return redirect()->back()->with(['error'=>$e->getMessage()]);
+        } 
+        
     }
 }

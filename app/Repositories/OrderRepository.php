@@ -13,7 +13,11 @@ class OrderRepository{
     }
 
     public function create($data){
-        return $this->order->create($data);
+        try{
+            return $this->order->create($data);
+        }catch(\Exception $e) {
+            return redirect()->back()->with(['error'=>$e->getMessage()]);
+        } 
     }
 
 }

@@ -10,8 +10,6 @@ class OrderService{
     }
 
     public function create($data){
-        $data = $request->all();
-
         return $this->order->create($data);
     }
 

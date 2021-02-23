@@ -20,6 +20,7 @@ class Order extends Model
         'weight',
         'mode',
         'amount',
-        'payment_channel'
+        'payment_channel',
+        'delivery_date'
     ];
 }

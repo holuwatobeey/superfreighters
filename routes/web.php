@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 
-
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +18,7 @@ use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('order.index');
-});
+})->name('/');
 
 Route::match(['get', 'post'],'confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
 
