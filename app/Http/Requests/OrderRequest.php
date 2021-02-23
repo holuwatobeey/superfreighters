@@ -23,6 +23,8 @@ class OrderRequest extends FormRequest
      */
     public function rules()
     {
+        $this->redirect = url()->previous() . '#getStarted';
+
         return [
             'name' => 'required',
             'email' => 'required|email',

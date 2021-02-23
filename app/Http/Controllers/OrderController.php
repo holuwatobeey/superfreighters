@@ -9,6 +9,8 @@ use Exception;
 use App\Http\Requests\OrderRequest;
 use App\Actions\CalculatePrice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class OrderController extends Controller
 {
@@ -27,7 +29,7 @@ class OrderController extends Controller
             return view('order.confirm', compact('request'));
 
         }catch(Exception $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return Redirect::to(URL::previous() . "#getStarted")->with(['error' => $e->getMessage()]);
         }
     }
 }
