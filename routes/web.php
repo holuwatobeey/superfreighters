@@ -20,6 +20,12 @@ Route::get('/', function () {
     return view('order.index');
 })->name('/');
 
+Route::get('/seed', function () {
+    Artisan::call('migrate:fresh --seed');
+    return 'Migrated';
+})->name('/');
+
+
 Route::match(['get', 'post'],'confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
 
 Route::group(['prefix' => 'payment'], function(){
