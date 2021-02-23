@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PagesTest extends TestCase
+class HomePageTest extends TestCase
 {
     /**
      * A basic test example.
@@ -20,11 +20,4 @@ class PagesTest extends TestCase
         $response->assertViewIs('order.index');
     }
 
-    public function test_order_details_page()
-    {
-        $response = $this->get('confirm-schedule');
-
-        $response->assertStatus(200);
-        $response->assertViewIs('order.confirm');
-    }
 }
