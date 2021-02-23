@@ -125,27 +125,6 @@ class OrderControllerTest extends TestCase
 
     }
 
-    public function test_that_order_is_not_stored_without_destination_country()
-    {
-        $data = [
-            // destination_country input is missing
-
-            'name' => 'George Michael',
-            'email' => 'horluwatowbeey@gmail.com',
-            'origin_country' => 'Nigeria',
-            'origin_city' => 'Yaba',
-            // 'destination_country' => 'United Kingdom',
-            'destination_city' => 'Maryland',
-            'parcels' => mt_rand(1,5),
-            'weight' => mt_rand(5,50),
-            'mode' => mt_rand(1,2),
-        ];
-        $response = $this->post(route('confirm'), $data);
-
-        $response->assertStatus(302);
-        
-        $response->assertSessionHasErrors(['destination_country' => 'The destination country field is required.']);
-    }
 
     public function test_that_order_is_not_stored_without_destination_city()
     {

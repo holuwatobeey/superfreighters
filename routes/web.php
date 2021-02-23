@@ -20,5 +20,5 @@ Route::get('/', function () {
     return view('order.index');
 });
 
-Route::post('confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
+Route::match(['get', 'post'],'confirm-schedule', [OrderController::class, 'confirm'])->name('confirm');
 
